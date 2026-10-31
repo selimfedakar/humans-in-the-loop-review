@@ -37,12 +37,13 @@ Requires a TeX distribution (e.g. MacTeX / TeX Live).
 
 ## Status
 
-- [ ] Deep-research synthesis landed
-- [ ] Target paper verified (arXiv id, venue, exact claims)
-- [ ] Bibliography fields verified
-- [ ] Sections drafted from synthesis
-- [ ] First full draft
-- [ ] Review pass
+- [x] Deep-research synthesis landed (24 sources, 25 claims verified, 21 confirmed)
+- [x] Target paper verified (arXiv:2608.23642, NeurIPS position paper)
+- [x] Sections drafted from synthesis — first full draft
+- [ ] Bibliography fields marked `UNVERIFIED` confirmed against primary sources
+- [ ] Re-verify the skeptical-debate figures (9–26% intervention success; 35-study review)
+- [ ] PDF built (needs local TeX or the GitHub Actions run)
+- [ ] Human review pass before public release
 
 > `\todo{...}` markers in `main.tex` flag everything still to be sourced. The
 > `notes/` directory holds the research synthesis each section is drawn from.
