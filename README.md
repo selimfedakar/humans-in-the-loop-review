@@ -57,5 +57,12 @@ fields confirmed before the final PDF.
 
 ## License
 
-Suggested (pick before publishing): **CC BY 4.0** for the paper text and
-**MIT** for any code. No license file is committed yet.
+This repository is dual-licensed:
+
+- **Paper text and figures** (everything under `paper/`, excluding build
+  tooling) — **CC BY 4.0**. Full text: [`paper/LICENSE`](paper/LICENSE).
+  You may share and adapt the work with attribution to Ahmet Selim Fedakar.
+- **Code** (the LaTeX build tooling, CI workflow, scripts) — **MIT**. Full
+  text: [`LICENSE`](LICENSE).
+
+© 2026 Ahmet Selim Fedakar.
