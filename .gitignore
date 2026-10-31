@@ -1,0 +1,19 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.nav
+*.snm
+*.vrb
+paper/main.pdf
+
+# Editor / OS
+.DS_Store
+*.swp
+.vscode/

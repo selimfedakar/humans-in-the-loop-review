@@ -1,0 +1,150 @@
+%% ============================================================
+%%  On Keeping Humans Meaningfully in the Loop of AI Agents:
+%%  A Critical Review and Research Agenda
+%%
+%%  Author: Ahmet Selim Fedakar
+%%  A response to and critical review of Mitchell, Ghosh & Passi,
+%%  "AI Agents Push Humans Out of the Loop".
+%%
+%%  Build: pdflatex main && bibtex main && pdflatex main && pdflatex main
+%% ============================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage{titlesec}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue]{hyperref}
+
+% Editorial note macro: anything still to be sourced from the research pass.
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+% Verified-claim macro, so draft prose can flag confidence level inline.
+\newcommand{\conf}[2]{#1\,\textcolor{gray}{\footnotesize[#2]}}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\title{\textbf{On Keeping Humans Meaningfully in the Loop of AI Agents:\\
+A Critical Review and Research Agenda}}
+
+\author{%
+  Ahmet Selim Fedakar\\
+  \small Independent Researcher\thanks{Affiliation and contact to be finalized before submission.}\\
+  \small \texttt{a.selimfedakar@gmail.com}%
+}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Autonomous AI agents are increasingly deployed with human oversight proposed as the
+primary safeguard. In a recent position paper, Mitchell, Ghosh, and Passi argue that
+current approaches to building and deploying agent systems do not merely fail to support
+human oversight---they actively degrade the cognitive capacities that effective oversight
+requires. This paper (i) reconstructs their argument and situates it in the longer
+literature on human--automation interaction, from Bainbridge's \emph{ironies of
+automation} to contemporary work on meaningful human control; (ii) critically evaluates
+how well the position's central empirical claim---that extended AI use causes skill
+atrophy---is supported by existing evidence; and (iii) proposes a concrete research agenda
+with testable hypotheses for studying oversight degradation in agentic systems.
+\todo{Finalize abstract once synthesis lands; tighten to one paragraph.}
+\end{abstract}
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+\todo{Motivate: the ``human in the loop'' is the default governance answer for agentic AI;
+the Mitchell et al. position is that this answer is self-undermining. State the three
+contributions of this review.}
+
+% ============================================================
+\section{The Position: Mitchell, Ghosh \& Passi}
+\label{sec:position}
+
+\todo{Faithful reconstruction of \citet{mitchell2025agents}: the two-part thesis
+(design impedes oversight AND use degrades the capacity for it), the proposed design-level
+affordances, and the organizational protocols. Verified against the actual PDF, with page
+anchors.}
+
+\subsection{The core argument}
+\todo{}
+
+\subsection{Proposed affordances and protocols}
+\todo{}
+
+% ============================================================
+\section{The Research Landscape}
+\label{sec:landscape}
+
+\todo{Map the lineage the position draws on and speaks to. Each subsection: what the work
+claims, its evidence base, and how it connects to the agentic-oversight question.}
+
+\subsection{The ironies of automation}
+\todo{\citet{bainbridge1983}: automating the easy parts leaves the human the hard residual;
+the better the automation, the less practiced---and more essential---the human operator.}
+
+\subsection{Automation bias, complacency, and the out-of-the-loop problem}
+\todo{\citet{parasuraman1997,parasuraman2010}; situation-awareness and the
+out-of-the-loop performance problem.}
+
+\subsection{Deskilling and skill atrophy}
+\todo{The empirical core of the critical evaluation---see Section~\ref{sec:critique}.}
+
+\subsection{Moral crumple zones and accountability}
+\todo{\citet{elish2019}: the human operator absorbs blame for failures of a system they
+could not realistically control.}
+
+\subsection{Meaningful human control and oversight critiques}
+\todo{\citet{santonidesio2018}; \citet{green2022} on the limits of mandated human oversight.}
+
+\subsection{Human--AI interaction guidelines}
+\todo{\citet{amershi2019} and related design-guideline work.}
+
+% ============================================================
+\section{Critical Evaluation}
+\label{sec:critique}
+
+\todo{How well-supported is the central claim? Separate (a) well-established findings
+from the automation literature, (b) extrapolations to LLM/agent settings, and (c) claims
+that are, as yet, conjecture. Treat ``human-in-the-loop as safety theater'' as a named
+counter-position and engage it.}
+
+% ============================================================
+\section{A Research Agenda}
+\label{sec:agenda}
+
+\todo{Open questions, gaps, and testable hypotheses the user can act on. Who is working on
+what (labs, authors, venues). This is the springboard section.}
+
+\begin{enumerate}[leftmargin=*,itemsep=4pt]
+  \item \todo{Hypothesis 1}
+  \item \todo{Hypothesis 2}
+  \item \todo{Hypothesis 3}
+\end{enumerate}
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+\todo{}
+
+% ============================================================
+\section*{Acknowledgments}
+\todo{Optional.}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
