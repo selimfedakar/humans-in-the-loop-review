@@ -4,7 +4,7 @@
 %%
 %%  Author: Ahmet Selim Fedakar
 %%  A response to and critical review of Mitchell, Ghosh & Passi,
-%%  "AI Agents Push Humans Out of the Loop".
+%%  "AI Agents Push Humans Out of the Loop" (NeurIPS 2026, arXiv:2608.23642).
 %%
 %%  Build: pdflatex main && bibtex main && pdflatex main && pdflatex main
 %% ============================================================
@@ -24,10 +24,8 @@
 \usepackage{titlesec}
 \usepackage[colorlinks=true,linkcolor=black,citecolor=blue,urlcolor=blue]{hyperref}
 
-% Editorial note macro: anything still to be sourced from the research pass.
+% Editorial note macro: anything still to be sourced or decided.
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
-% Verified-claim macro, so draft prose can flag confidence level inline.
-\newcommand{\conf}[2]{#1\,\textcolor{gray}{\footnotesize[#2]}}
 
 \titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
@@ -37,7 +35,7 @@ A Critical Review and Research Agenda}}
 
 \author{%
   Ahmet Selim Fedakar\\
-  \small Independent Researcher\thanks{Affiliation and contact to be finalized before submission.}\\
+  \small Independent Researcher\thanks{Affiliation and contact to be finalized before submission. \todo{set affiliation}}\\
   \small \texttt{a.selimfedakar@gmail.com}%
 }
 
@@ -49,100 +47,345 @@ A Critical Review and Research Agenda}}
 \begin{abstract}
 \noindent
 Autonomous AI agents are increasingly deployed with human oversight proposed as the
-primary safeguard. In a recent position paper, Mitchell, Ghosh, and Passi argue that
-current approaches to building and deploying agent systems do not merely fail to support
-human oversight---they actively degrade the cognitive capacities that effective oversight
-requires. This paper (i) reconstructs their argument and situates it in the longer
-literature on human--automation interaction, from Bainbridge's \emph{ironies of
-automation} to contemporary work on meaningful human control; (ii) critically evaluates
-how well the position's central empirical claim---that extended AI use causes skill
-atrophy---is supported by existing evidence; and (iii) proposes a concrete research agenda
-with testable hypotheses for studying oversight degradation in agentic systems.
-\todo{Finalize abstract once synthesis lands; tighten to one paragraph.}
+primary safeguard. In a recent NeurIPS position paper, \citet{mitchell2026agents} argue
+that current approaches to building and deploying agent systems do not merely fail to
+support human oversight---they contribute to its degradation: overseers face output
+generated faster than they can review, approval fatigue sets in, and, invoking
+\citeauthor{bainbridge1983}'s \emph{ironies of automation}, the very act of oversight
+erodes the cognitive capacities that effective oversight requires. This paper (i)
+reconstructs that argument and situates it in the human--automation interaction
+literature, from \citeyear{bainbridge1983} onward; (ii) critically evaluates how well its
+central empirical claim---that extended AI use causes skill atrophy in knowledge work---is
+supported, distinguishing a strongly grounded \emph{descriptive} lineage from a largely
+\emph{asserted} applied claim; and (iii) proposes a concrete research agenda with testable
+hypotheses for studying oversight degradation in agentic systems. We argue that the
+position is directionally correct and well-motivated, but that its most consequential
+claim remains an inference by analogy awaiting direct measurement---which we frame as the
+field's central open problem.
 \end{abstract}
 
 % ============================================================
 \section{Introduction}
 \label{sec:intro}
 
-\todo{Motivate: the ``human in the loop'' is the default governance answer for agentic AI;
-the Mitchell et al. position is that this answer is self-undermining. State the three
-contributions of this review.}
+``Keep a human in the loop'' has become the default governance answer to the risks of
+increasingly autonomous AI agents. It appears in corporate deployment policy, in
+regulatory text such as the EU AI Act's meaningful-control requirement, and in the design
+of nearly every production agent framework, which gates consequential actions behind a
+human approval step. The appeal is obvious: a competent human supervisor can, in
+principle, catch an agent's mistakes before they cause harm.
+
+A recent position paper by \citet{mitchell2026agents} challenges the premise directly. Its
+claim is not the familiar one that oversight is \emph{hard}; it is the stronger and more
+unsettling claim that the way we currently build and deploy agents \emph{actively degrades}
+the human capacities oversight depends on. If that is right, then human-in-the-loop is not
+merely an imperfect safeguard---it is a self-undermining one, strengthening the very
+dependency it is meant to check.
+
+This paper has three aims, corresponding to three things a researcher entering this area
+needs. First (Section~\ref{sec:position}), a faithful reconstruction of the position's
+argument and its proposed remedies. Second (Section~\ref{sec:landscape}), a map of the
+intellectual lineage it stands on---four decades of human-factors research on automation
+and a fast-moving 2025--2026 empirical frontier. Third (Sections~\ref{sec:critique}
+and~\ref{sec:agenda}), a critical evaluation that separates what is well-established from
+what is asserted, and a research agenda built on that gap. Throughout, we are deliberately
+careful about evidence level: a central contribution of this review is to show \emph{which}
+parts of the argument are load-bearing empirical fact and which are, as yet, well-motivated
+conjecture.
 
 % ============================================================
 \section{The Position: Mitchell, Ghosh \& Passi}
 \label{sec:position}
 
-\todo{Faithful reconstruction of \citet{mitchell2025agents}: the two-part thesis
-(design impedes oversight AND use degrades the capacity for it), the proposed design-level
-affordances, and the organizational protocols. Verified against the actual PDF, with page
-anchors.}
+\subsection{Provenance and framing}
+
+The target is ``AI Agents Push Humans Out of the Loop'' \citep{mitchell2026agents}, a
+position paper accepted to NeurIPS (arXiv:2608.23642; v1 24 August 2026, v3 6 September
+2026; cs.AI/cs.HC), authored by Margaret Mitchell and Avijit Ghosh of Hugging Face and
+Samir Passi of the Data \& Society Research Institute. It is explicitly a \emph{position}
+paper: it advances a normative argument and a design stance rather than reporting a new
+experiment. It is accompanied by a Data \& Society primer, ``The Oversight Fallacy: Why AI
+Agents Require More than Humans-in-the-Loop'' \citep{passi2026oversight}, which grounds a
+closely related argument in fieldwork in a computational biology laboratory and enumerates
+four components of oversight in practice---knowledge, observation, control, and
+intervention.
 
 \subsection{The core argument}
-\todo{}
 
-\subsection{Proposed affordances and protocols}
-\todo{}
+The position has two linked halves, stated plainly in the abstract. The first is that
+current agent \emph{design} impedes effective oversight. The second---and the paper's
+distinctive contribution---is that the cognitive capacities oversight requires are
+\emph{themselves degraded} by extended use of AI systems. Together these yield the thesis
+that current development and deployment approaches ``do not support effective human
+oversight---they contribute to its degradation.'' The paper frames part of this degradation
+as \emph{passively incentivized} by prevailing design and deployment choices rather than
+actively intended, a nuance worth preserving when restating the claim.
+
+The mechanism the paper emphasizes is concrete. Traditional safeguards such as approval
+prompts work only when a user can recognize a mistake and intervene before its consequences
+cascade. Agents routinely violate that precondition: they generate voluminous output faster
+than a human can meaningfully review it, and the result is that overseers find themselves
+``repeatedly approving prompts,'' producing what the paper calls \emph{approval fatigue}.
+
+\subsection{The irony of automation: ``oversight degrades the overseer''}
+
+The paper devotes a full section (its Section~4, ``The irony of automation'') to grounding
+this in \citet{bainbridge1983}. Bainbridge's classic observation is that the more capable an
+automated system becomes, the more the human operator's skill and situational awareness
+atrophy through disuse---so that operators are least prepared to intervene precisely when
+intervention matters most. Mitchell, Ghosh, and Passi extend this from the control room to
+the AI overseer and compress it into a memorable formulation: ``the very act of being an
+overseer degrades the capacities oversight requires: \emph{oversight degrades the
+overseer}.'' This is the conceptual heart of the paper.
+
+\subsection{The prescriptive core: cognitive scaffolding}
+
+The paper's remedy is a normative demand plus a two-stage solution set it calls
+\emph{cognitive scaffolding}, ``provided by developers and deployers.'' The normative demand
+is that the human needs of overseers be treated as equal in importance to AI-agent
+capability---a reweighting of priorities, not merely an add-on. The two stages are:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Development-stage design affordances:} \emph{strategic friction}
+        (deliberately slowing the human at decision points), \emph{decision design}, and
+        \emph{behavioral monitoring}.
+  \item \textbf{Deployment-stage organizational protocols:} trainings and exercises, role
+        design, audits, and attention to workload and scheduling.
+\end{itemize}
+
+These are organized against a set of oversight \emph{goals} in a goals-versus-mechanisms
+table: the paper identifies six high-level goals---preventing automation bias, fatigue,
+overreliance, and cognitive overload, and supporting judgement and engagement---and uses
+their intersection with solution categories to catalog existing mechanisms and locate gaps.
+We note two simplifications to avoid overstating the structure: decision design spans both
+stages, and the deployment side carries a workload/scheduling category, so the clean
+three-and-three split is a convenience rather than the paper's exact taxonomy.
 
 % ============================================================
 \section{The Research Landscape}
 \label{sec:landscape}
 
-\todo{Map the lineage the position draws on and speaks to. Each subsection: what the work
-claims, its evidence base, and how it connects to the agentic-oversight question.}
+The position's power comes from standing on a deep and well-established human-factors
+tradition. This section maps that lineage and the recent frontier the paper joins.
 
 \subsection{The ironies of automation}
-\todo{\citet{bainbridge1983}: automating the easy parts leaves the human the hard residual;
-the better the automation, the less practiced---and more essential---the human operator.}
+
+\citet{bainbridge1983} is the keystone. Its core ``irony'' is double: automating the easy
+parts of a task leaves the human the hard residual, and the skills needed to handle that
+residual decay precisely because the automation now handles the routine. The result is an
+operator who is both less practiced and more essential---a structural trap, not an
+individual failing. The paper's ``oversight degrades the overseer'' is a direct descendant.
+
+\subsection{Levels of automation and the human's changing role}
+
+Bainbridge's insight was formalized into the \emph{levels of automation} framework.
+\citet{sheridan1978} introduced a ten-level scale from fully manual to fully autonomous
+control; \citet{parasuraman2000} generalized this into a model of \emph{types and levels}
+of human interaction with automation across four stages (information acquisition, analysis,
+decision, action). This taxonomy---one of the most cited in the field---gives a vocabulary
+for exactly where a human sits relative to an agent, and therefore for what ``in the loop''
+even means in a given system.
 
 \subsection{Automation bias, complacency, and the out-of-the-loop problem}
-\todo{\citet{parasuraman1997,parasuraman2010}; situation-awareness and the
-out-of-the-loop performance problem.}
+
+Two robust empirical phenomena underpin the degradation concern.
+\citet{parasuraman1997}, in ``Humans and Automation: Use, Misuse, Disuse, Abuse''---one of
+the most-cited papers in human factors---established how people systematically mis-calibrate
+their trust in automation. \citet{parasuraman2010} then argued that \emph{automation
+complacency} (insufficient monitoring) and \emph{automation bias} (over-accepting automated
+cues) are not distinct phenomena but overlapping manifestations of the same effect, with
+reallocation of attentional resources as the central shared mechanism. We flag one
+precision point for anyone citing this: the 2010 paper is explicitly an \emph{integration},
+and it names a second, non-attentional route (``active discounting,'' a decision bias), so
+attentional withdrawal is the dominant but not sole cause. This body of work is the
+strongest empirical anchor for the position's claims---and, as Section~\ref{sec:critique}
+argues, also the source of its central vulnerability, because it was established on
+rule-based automation in aviation and process control, not on generative AI agents.
 
 \subsection{Deskilling and skill atrophy}
-\todo{The empirical core of the critical evaluation---see Section~\ref{sec:critique}.}
+
+The step from ``operators lose skill through disuse'' (well-documented in aviation and
+process control) to ``knowledge workers and developers lose skill through extended agent
+use'' is the position's most consequential move. It is also, as we argue below, the least
+directly evidenced in the agentic setting---the clearest opening for new research.
 
 \subsection{Moral crumple zones and accountability}
-\todo{\citet{elish2019}: the human operator absorbs blame for failures of a system they
-could not realistically control.}
 
-\subsection{Meaningful human control and oversight critiques}
-\todo{\citet{santonidesio2018}; \citet{green2022} on the limits of mandated human oversight.}
+\citet{elish2019} supplies the accountability counterpart to the cognitive one. A
+\emph{moral crumple zone} is the human operator who absorbs blame for the failure of a
+system they could not realistically control---structurally positioned to be held
+responsible while lacking the capacity to intervene effectively. This sharpens why
+degraded oversight is not only a safety problem but an injustice one: a human kept nominally
+``in the loop'' primarily to bear liability is oversight as theater.
 
-\subsection{Human--AI interaction guidelines}
-\todo{\citet{amershi2019} and related design-guideline work.}
+\subsection{Meaningful human control and the critique of mandated oversight}
+
+\citet{santonidesio2018} articulate \emph{meaningful human control} as a philosophical
+standard---tracking and tracing conditions a system must satisfy for human control to be
+real rather than nominal. In parallel, a critical literature questions whether mandated
+human oversight works at all: \citet{green2022} argues that policies requiring human
+oversight of government algorithms often fail on their own terms, and a thread we group
+under ``fictional human oversight'' \citep{fictionaloversight2024} contends that such
+requirements can provide the appearance of control without the substance. The position
+paper lands inside this live controversy, not a settled consensus.
+
+\subsection{The 2025--2026 empirical frontier}
+
+A cluster of very recent work makes the ``oversight is harder than frameworks assume'' case
+empirically---and is where a new researcher should look for collaborators and open threads.
+We stress an attribution point: these are \emph{distinct} papers from the position paper,
+sharing at most one author, and should be cited to their own sources.
+
+\begin{itemize}[leftmargin=*,itemsep=3pt]
+  \item \textbf{Oversight in practice.} \citet{dhanorkar2026} interviewed 17 developers who
+        use coding agents (e.g., Claude Code, Cline) at least weekly and found they perform
+        \emph{at least four} forms of oversight---a priori control, co-planning, real-time
+        monitoring, and post hoc review---showing oversight is not only reactive but
+        preventative and proactive. Crucially, developers settle for ``efficient, not
+        perfect'' oversight, exposing a gap between governance frameworks that assume
+        oversight is feasible and the messy reality of using agents.
+  \item \textbf{Verification can backfire.} \citet{recchia2025} show that when people did
+        independent research to check an AI's answers, they became \emph{more} confident in
+        those answers even when the answers were wrong---and this held even under
+        substantial financial incentives for accuracy. Confirmation bias, in other words,
+        can defeat the ``human verification scales'' assumption at the core of scalable
+        oversight.
+  \item \textbf{Oversight as good work.} \citet{faas2025} ground oversight in work-design
+        psychology: effectiveness depends not only on error detection but on the overseer's
+        motivation and the meaningfulness of the work. Through four co-design workshops they
+        derive four requirements---understanding tasks and responsibilities, insight into
+        the AI's decision-making, meaningful contribution, and collaboration with peers and
+        the AI---integrated with the SMART work-design model.
+  \item \textbf{When not to automate.} \citet{delachica2026} propose a pre-decision filter
+        (PHP-AIO) that, they argue, acts \emph{before} the deployment-commitment choice,
+        distinguishing itself from NIST, EU AI Act, and HITL taxonomies that engage only
+        after a deployment candidate exists. We mark this medium-confidence: the paper's
+        self-positioning is contestable (the NIST AI RMF MAP function and EU AI Act Art.~5
+        do bear on whether to deploy), and its detailed internal structure could not be
+        independently verified.
+\end{itemize}
 
 % ============================================================
 \section{Critical Evaluation}
 \label{sec:critique}
 
-\todo{How well-supported is the central claim? Separate (a) well-established findings
-from the automation literature, (b) extrapolations to LLM/agent settings, and (c) claims
-that are, as yet, conjecture. Treat ``human-in-the-loop as safety theater'' as a named
-counter-position and engage it.}
+\subsection{What is well supported}
+
+The position's \emph{descriptive} foundation is strong. Automation bias and complacency,
+the out-of-the-loop performance problem, and the ironies of automation are established
+across decades of peer-reviewed human-factors research
+\citep{bainbridge1983,parasuraman1997,parasuraman2000,parasuraman2010}. That human
+oversight of agents is harder than governance frameworks assume is now also empirically
+supported in the agentic setting \citep{dhanorkar2026}, and that human verification can
+actively backfire is directly demonstrated \citep{recchia2025}. On these points the paper
+is not speculating; it is reporting a mature consensus and extending it with fresh evidence.
+
+\subsection{The evidence gap: skill atrophy asserted, not measured}
+
+The paper's most consequential claim---that extended use of AI agents specifically causes
+\emph{skill atrophy} in knowledge and software work---is, in the agentic setting, largely
+\emph{asserted by analogy} to the older automation literature rather than demonstrated by
+direct longitudinal measurement. The companion empirical works establish adjacent facts:
+that oversight is effortful and imperfect \citep{dhanorkar2026}, and that verification can
+increase misplaced confidence \citep{recchia2025}. Neither establishes AI-induced
+deskilling as a \emph{measured} effect over time. This is not a fatal objection to a
+position paper---whose job is to argue, not to run the experiment---but it is the precise
+boundary between what the field knows and what it suspects, and it should be stated as such.
+Mistaking the analogy for a finding is exactly the overclaim this review is designed to
+prevent.
+
+\subsection{Does oversight add safety, or theater?}
+
+If human verification can backfire \citep{recchia2025} and, in some reported settings,
+intervention succeeds only a minority of the time, then the burden shifts: the interesting
+question is not \emph{whether} to keep a human in the loop but \emph{under what design
+conditions} doing so measurably adds safety. The position paper's proposed affordances
+(strategic friction, decision design) are plausible answers, but they are hypotheses, not
+yet validated interventions. Combined with the moral-crumple-zone critique
+\citep{elish2019}, this is the strongest version of the skeptical case: oversight that
+neither catches errors nor is designed to can still serve to allocate blame.
+
+\subsection{What the paper does \emph{not} claim}
+
+For accuracy, three things attributed to this literature in secondary summaries did
+\emph{not} survive verification and should not be repeated as the position paper's content:
+it does \emph{not} present a clean four-item list of named mechanisms (approval fatigue /
+automation bias / loss of situational awareness / skill atrophy) as its taxonomy; it does
+\emph{not} contain a ``twelve design considerations via SMART'' scheme (that framing belongs
+to a different line of work, \citet{faas2025}, and even there the twelve-item operational
+claim failed verification); and the PHP-AIO protocol's detailed gate/category structure
+\citep{delachica2026} could not be verified and should not be stated as fact. Flagging these
+guards the present paper against inheriting other summaries' errors.
 
 % ============================================================
 \section{A Research Agenda}
 \label{sec:agenda}
 
-\todo{Open questions, gaps, and testable hypotheses the user can act on. Who is working on
-what (labs, authors, venues). This is the springboard section.}
+The gap identified above is an opportunity. We propose four directions, each with a
+testable core.
 
-\begin{enumerate}[leftmargin=*,itemsep=4pt]
-  \item \todo{Hypothesis 1}
-  \item \todo{Hypothesis 2}
-  \item \todo{Hypothesis 3}
-\end{enumerate}
+\subsection{Direction 1: Measure AI-induced skill atrophy directly}
+
+\textbf{Open question.} Is skill atrophy in knowledge/agentic work a real, measurable
+effect, or an inference from classic human-factors analogies?
+\textbf{Testable hypothesis.} Over months of sustained agent use, a cohort's unaided
+performance on the underlying task (e.g., debugging without the agent, or situational
+awareness during a hand-back) declines relative to a matched control, controlling for task
+difficulty. \textbf{Why it matters.} No direct longitudinal measurement is cited in the
+literature; this is the field's central empirical hole. It is also safety-critical in
+embodied settings such as a voice-AI automotive agent, where driver vigilance decay during
+extended assisted driving is exactly the ``out-of-the-loop'' problem with lives attached.
+
+\subsection{Direction 2: Identify design conditions under which oversight actually helps}
+
+\textbf{Open question.} Given that verification can backfire \citep{recchia2025} and
+intervention success can be low, when does oversight add safety rather than theater?
+\textbf{Testable hypothesis.} The position paper's ``strategic friction'' and decision
+design measurably raise intervention-success and error-catch rates in an agent workflow,
+and do so without being neutralized by approval fatigue over time. \textbf{Method sketch.}
+Controlled studies that manipulate friction and decision-surface design and measure
+caught-error rate, false-approval rate, and their decay.
+
+\subsection{Direction 3: Toward an integrated theory of oversight design}
+
+\textbf{Open question.} How do the competing solution framings reconcile---the position
+paper's ``cognitive scaffolding'' \citep{mitchell2026agents}, the work-design/SMART ``good
+work'' framing \citep{faas2025}, and the ``sometimes don't automate'' pre-decision filter
+\citep{delachica2026}? Which affordances are \emph{necessary} versus \emph{sufficient}?
+\textbf{Why it matters.} This synthesis is currently unclaimed; a unifying design theory of
+agent oversight is an opening a new researcher could own.
+
+\subsection{Direction 4: Field, venue, and framing}
+
+The active cluster spans Hugging Face (Mitchell, Ghosh), Data \& Society (Passi, Singh),
+Microsoft Research (Dhanorkar, Vorvoreanu), and Saarland/Freiburg HCI (Langer, Feit, and
+colleagues), building on the classic human-factors tradition (the Parasuraman lineage).
+Relevant venues are the NeurIPS/ICML position tracks, FAccT, CSCW, AAAI, and \emph{Human
+Factors}. \textbf{Strategic question for a new entrant.} Does the agentic-oversight gap
+belong in ML safety, HCI, or human factors---and which framing gives the most leverage? Our
+reading is that the measurement gap (Direction~1) is best pursued with HCI/human-factors
+methods but published into the ML-safety conversation, where the claim currently circulates
+without the measurement.
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-\todo{}
+\citet{mitchell2026agents} make a directionally correct and well-motivated argument: the
+dominant ``human in the loop'' safeguard is in tension with how agents are actually built,
+and the oversight relationship may erode the very capacities it relies on. The descriptive
+core of that argument rests on decades of solid human-factors research and a credible new
+empirical frontier. Its most striking claim---that extended AI-agent use causes skill
+atrophy in knowledge work---remains, in the agentic setting, an inference awaiting direct
+measurement. That gap is not a weakness to dismiss the paper over; it is the research
+program the paper implicitly calls for. Keeping humans \emph{meaningfully} in the loop will
+require treating overseer cognition as a first-class design target---and, first of all,
+measuring whether the degradation we fear is actually happening.
 
 % ============================================================
 \section*{Acknowledgments}
-\todo{Optional.}
+\todo{Optional. Note the use of an automated literature-search and verification pipeline in
+the methods/acknowledgments if the venue requires tool disclosure.}
 
 \bibliographystyle{plainnat}
 \bibliography{references}

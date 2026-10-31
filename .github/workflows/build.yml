@@ -1,0 +1,30 @@
+name: Build PDF
+
+on:
+  push:
+    branches: [main]
+    paths: ["paper/**", ".github/workflows/build.yml"]
+  pull_request:
+    paths: ["paper/**"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: paper
+          root_file: main.tex
+          latexmk_use_xelatex: false
+          args: -pdf -bibtex -interaction=nonstopmode -halt-on-error
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: paper-pdf
+          path: paper/main.pdf
+          if-no-files-found: error

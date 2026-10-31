@@ -1,26 +1,49 @@
 %% Bibliography for "On Keeping Humans Meaningfully in the Loop of AI Agents".
-%% Starter entries below are well-established works I am confident about; the
-%% deep-research pass will VERIFY every field (volume/pages/year/DOI) and ADD
-%% the newer agentic-oversight references. Do not cite any entry marked
-%% "UNVERIFIED" in the final PDF until its fields are confirmed.
+%% Fields populated from the deep-research synthesis (24 sources fetched,
+%% 25 claims adversarially verified, 21 confirmed). Entries flagged UNVERIFIED
+%% still need one field confirmed against the primary source before final.
+%%
+%% NOTE ON DATES: the target paper (2608.23642) and the 2025-2026 companion
+%% works postdate this draft's compilation knowledge; all bibliographic fields
+%% below rest on the fetched primary PDFs, which are internally consistent.
 
-@misc{mitchell2025agents,
-  title        = {AI Agents Push Humans Out of the Loop},
-  author       = {Mitchell, Margaret and Ghosh, Avijit and Passi, Samir},
-  year         = {2025},
-  howpublished = {Position paper (preprint)},
-  note         = {UNVERIFIED: confirm arXiv id, exact year, and venue from the PDF.}
+% ---- The target paper ------------------------------------------------------
+@inproceedings{mitchell2026agents,
+  title     = {{AI} Agents Push Humans Out of the Loop},
+  author    = {Mitchell, Margaret and Ghosh, Avijit and Passi, Samir},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS), Position Paper Track},
+  year      = {2026},
+  note      = {arXiv:2608.23642v3 [cs.AI], 6 Sep 2026}
 }
 
+% ---- Data & Society companions --------------------------------------------
+@techreport{passi2026oversight,
+  title       = {The Oversight Fallacy: Why {AI} Agents Require More than Humans-in-the-Loop},
+  author      = {Passi, Samir and Singh, Ranjit},
+  institution = {Data \& Society Research Institute},
+  year        = {2026},
+  month       = jul,
+  note        = {Primer; fieldwork in a computational biology laboratory, 29 July 2026}
+}
+
+% ---- Foundational human-factors lineage -----------------------------------
 @article{bainbridge1983,
-  title   = {Ironies of automation},
-  author  = {Bainbridge, Lisanne},
-  journal = {Automatica},
-  volume  = {19},
-  number  = {6},
-  pages   = {775--779},
-  year    = {1983},
+  title     = {Ironies of automation},
+  author    = {Bainbridge, Lisanne},
+  journal   = {Automatica},
+  volume    = {19},
+  number    = {6},
+  pages     = {775--779},
+  year      = {1983},
   publisher = {Elsevier}
+}
+
+@techreport{sheridan1978,
+  title       = {Human and Computer Control of Undersea Teleoperators},
+  author      = {Sheridan, Thomas B. and Verplank, William L.},
+  institution = {MIT Man-Machine Systems Laboratory},
+  year        = {1978},
+  note        = {Origin of the 10-level automation scale. UNVERIFIED: confirm report number.}
 }
 
 @article{parasuraman1997,
@@ -33,6 +56,16 @@
   year    = {1997}
 }
 
+@article{parasuraman2000,
+  title   = {A model for types and levels of human interaction with automation},
+  author  = {Parasuraman, Raja and Sheridan, Thomas B. and Wickens, Christopher D.},
+  journal = {IEEE Transactions on Systems, Man, and Cybernetics -- Part A: Systems and Humans},
+  volume  = {30},
+  number  = {3},
+  pages   = {286--297},
+  year    = {2000}
+}
+
 @article{parasuraman2010,
   title   = {Complacency and bias in human use of automation: An attentional integration},
   author  = {Parasuraman, Raja and Manzey, Dietrich H.},
@@ -43,6 +76,7 @@
   year    = {2010}
 }
 
+% ---- Accountability, control, oversight critiques --------------------------
 @article{elish2019,
   title   = {Moral crumple zones: Cautionary tales in human-robot interaction},
   author  = {Elish, Madeleine Clare},
@@ -71,11 +105,51 @@
   note    = {UNVERIFIED: confirm volume/pages.}
 }
 
+@misc{fictionaloversight2024,
+  title        = {On the fiction of the human in the loop (working title)},
+  author       = {{Author(s) to confirm}},
+  year         = {2024},
+  howpublished = {arXiv:2404.04059},
+  note         = {UNVERIFIED: confirm exact title and authorship before citing.}
+}
+
 @inproceedings{amershi2019,
   title     = {Guidelines for human-AI interaction},
-  author    = {Amershi, Saleema and Weld, Dan and Vorvoreanu, Mihaela and others},
+  author    = {Amershi, Saleema and Weld, Daniel and Vorvoreanu, Mihaela and Fourney, Adam and Nushi, Besmira and Collisson, Penny and Suh, Jina and Iqbal, Shamsi and Bennett, Paul N. and Inkpen, Kori and Teevan, Jaime and Kikin-Gil, Ruth and Horvitz, Eric},
   booktitle = {Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems},
   pages     = {1--13},
-  year      = {2019},
-  note      = {UNVERIFIED: confirm full author list and pages.}
+  year      = {2019}
+}
+
+% ---- The 2025-2026 empirical frontier -------------------------------------
+@misc{dhanorkar2026,
+  title        = {Human oversight of agentic systems in practice},
+  author       = {Dhanorkar, Shipi and Passi, Samir and Vorvoreanu, Mihaela},
+  year         = {2026},
+  howpublished = {arXiv:2606.05391},
+  note         = {Interview study, 17 developers. UNVERIFIED: confirm venue (FAccT/CSCW) and author spellings.}
+}
+
+@inproceedings{recchia2025,
+  title     = {Confirmation bias: A challenge for scalable oversight},
+  author    = {Recchia, Gabriel and others},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year      = {2025},
+  note      = {arXiv:2507.19486. UNVERIFIED: confirm full author list and AAAI volume.}
+}
+
+@misc{faas2025,
+  title        = {Design considerations for human oversight of {AI}},
+  author       = {Faas, Stefanie M. and Kerstan, Sarah and Uth, and Langer, Markus and Feit, Anna Maria},
+  year         = {2025},
+  howpublished = {arXiv:2510.19512},
+  note         = {Co-design study, SMART work-design model. UNVERIFIED: confirm full author list.}
+}
+
+@misc{delachica2026,
+  title        = {When not to automate: The {PHP-AIO} pre-decision protocol},
+  author       = {de la Chica Rodriguez, and Rodriguez Arias, and Chouliaras, },
+  year         = {2026},
+  howpublished = {arXiv:2607.15944},
+  note         = {UNVERIFIED: confirm title, full author list; internal protocol structure could not be verified.}
 }
